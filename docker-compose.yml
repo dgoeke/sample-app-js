@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+  cms-cloud-db:
+    image: 'cms-cloud-db'
+    container_name: 'cms-cloud-db'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=cms-cloud-db
+      - POSTGRES_USER=cms-cloud
+      - POSTGRES_PASSWORD=stammer-install-headlock
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    networks:
+      main:
+        aliases:
+          - cms-cloud-db
+  cms-cloud-app:
+    image: 'cms-cloud-app'
+    container_name: 'cms-cloud-app'
+    links:
+      - cms-cloud-db
+    ports:
+      - '5700:5200'
+    networks:
+      main:
+        aliases:
+          - cms-cloud-app
+    command: dockerize -wait tcp://cms-cloud-db:5432 -timeout 1m yarn migrate-seed-start
+    depends_on:
+      - 'cms-cloud-db'
+
+networks:
+  main:

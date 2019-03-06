@@ -1,0 +1,33 @@
+repos:
+  - repo: git://github.com/pre-commit/pre-commit-hooks
+    rev: v2.1.0
+    hooks:
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: detect-private-key
+      - id: pretty-format-json
+        args:
+          - --autofix
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: yarn --cwd testapp lint
+        language: system
+        files: testapp/*.js$
+
+
+  - repo: git://github.com/detailyang/pre-commit-shell
+    rev: 1.0.4
+    hooks:
+      - id: shell-lint
+
+  - repo: git://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.8.1
+    hooks:
+      - id: terraform_docs
+      - id: terraform_fmt
+      - id: terraform_validate_no_variables

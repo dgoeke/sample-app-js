@@ -1,0 +1,42 @@
+# Ignore terraform work files
+plan.out
+.terraform
+terraform.tfstate.backup
+terraform.tfstate.*.backup
+
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# IDE
+.vscode
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Babel ES6 transpiled files
+dist
+
+# Dependency directory
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# npm
+yarn.lock
+package-lock.json
+
+# local configs
+.env
+
+# docker
+/testapp/data/postgres

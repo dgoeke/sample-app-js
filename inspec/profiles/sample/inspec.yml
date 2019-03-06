@@ -1,0 +1,7 @@
+name: sample
+title: InSpec Sample Profile
+maintainer: David Goeke
+summary: Test compliance scanning with InSpec
+version: 0.0.1
+supports:
+  - platform-family: unix

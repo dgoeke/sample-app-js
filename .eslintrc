@@ -1,0 +1,32 @@
+{
+  "rules": {
+    "arrow-parens": ["error", "as-needed"],
+    "comma-dangle": [0],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "linebreak-style": ["error", "unix"],
+    "max-len": ["error", 200],
+    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 8 }],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-underscore-dangle": [0],
+    "object-curly-newline": ["error", {
+      "ObjectExpression": { "consistent": true, "multiline": true, "minProperties": 6 },
+      "ObjectPattern": { "consistent": true, "multiline": true, "minProperties": 6 }
+    }],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "space-before-function-paren": [2, { "anonymous": "always", "named": "never" }]
+  },
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base"
+    // "plugin:flowtype/recommended"
+  ]
+}

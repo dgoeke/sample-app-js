@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CMS Cloud West</title>
+  <link rel="stylesheet" href="/dist/styles/index.css" />
+  <link rel="stylesheet" href="/static/custom.css" />
+
+</head>
+<body class="ds-base">
+  <div class="ds-u-margin-y--5 container">
+    <h1 class="ds-h1">Report an issue</h1>
+    <p class="ds-text ds-u-measure--base">Please fill out the fields below to report your issue. After you've reported an issue, you'll receive a response within 24 hours.</p>
+
+    <form>
+      <label class="ds-c-label" for="input-title">Title</label>
+      <input class="ds-c-field" id="input-title" name="title" type="text" />
+
+      <label class="ds-c-label" for="input-description">Describe your issue</label>
+      <textarea class="ds-c-field" id="input-description" name="description" rows="6"></textarea>
+
+      <button class="ds-c-button ds-c-button--primary ds-u-margin-top--3" type="submit">
+        Report issue
+      </button>
+      <a class="ds-c-button" href="#">Cancel</a>
+    </form>
+  </div>
+  <script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var data = JSON.stringify({"title": event.target.elements["title"].value, "description": event.target.elements["description"].value});
+
+      fetch('/cms-cloud/api/resources', {
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        body: data
+      })
+      .then(function(resp) { return resp.json() })
+      .then(function(data) { window.location.replace("/cms-cloud/api/resources/" + data.id) });
+
+    });
+  </script>
+</body>
+</html>
