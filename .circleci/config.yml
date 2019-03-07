@@ -47,36 +47,10 @@ jobs:
 
   precommit_checks:
     docker:
-      - image: node:10.13.0-slim
+      - image: 027086599304.dkr.ecr.us-west-2.amazonaws.com/testapp-pipeline-tools:latest
     working_directory: /app
     steps:
       - checkout
-      - run:
-          name: Installing pre-commit
-          command: |
-            apt update && apt install -y python-dev git unzip shellcheck
-            curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py
-            pip install pre-commit
-            pre-commit install
-      - run:
-          name: Installing terraform
-          working_directory: /tmp
-          environment:
-            TERRAFORM_VERSION: 0.11.11
-          command: |
-            curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-            unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && mv ./terraform /bin
-      - run:
-          name: Installing terraform-docs
-          working_directory: /tmp
-          environment:
-            TERRAFORM_DOCS_VERSION: v0.6.0
-          command: |
-            curl -LO https://github.com/segmentio/terraform-docs/releases/download/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64
-            mv terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64 /bin/terraform-docs && chmod +x /bin/terraform-docs
-      - run:
-          name: Installing markdownlint / eslint
-          command: npm install -g markdownlint-cli eslint
       - run:
           name: Pre-commit checks
           command: pre-commit run --all-files
